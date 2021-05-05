@@ -264,9 +264,11 @@ public class hotel_booker {
 }
 
 class ZoomPanel extends JPanel {
-    /**
-     *
-     */
+
+    JButton SHANGRI_LA_hotel = new JButton(new ImageIcon("img/SHANGRI_LA_Icon.jpg"));
+    JButton OrientalHotel = new JButton(new ImageIcon("img/Oriental_Icon.jpg"));
+    JButton Benevolence = new JButton(new ImageIcon("img/Benevolence_Icon.jpg"));
+
     private static final long serialVersionUID = 1L;
     private ImageIcon ii;
     private Dimension frameSize;
@@ -281,6 +283,16 @@ class ZoomPanel extends JPanel {
         width = 240;
         height = 300;
         setImgPos();
+
+        SHANGRI_LA_hotel.setBounds(this.x + (width / 2), this.y + (height / 10), 30, 40);
+        this.add(SHANGRI_LA_hotel);
+
+        OrientalHotel.setBounds(this.x + (width / 3), this.y + (height / 4 * 3), 40, 42);
+        this.add(OrientalHotel);
+
+        Benevolence.setBounds(this.x + (width / 5 * 4), this.y + (height / 2), 40, 36);
+        this.add(Benevolence);
+
 
         final int[] originX = new int[1];
         final int[] originY = new int[1];
@@ -324,9 +336,14 @@ class ZoomPanel extends JPanel {
 
         width += width / 9;
         height += height / 9;
+
         setImgPos();
 
         repaint();
+
+        SHANGRI_LA_hotel.setBounds(this.x + (width / 2), this.y + (height / 10), 30, 40);
+        OrientalHotel.setBounds(this.x + (width / 3), this.y + (height / 4 * 3), 40, 42);
+        Benevolence.setBounds(this.x + (width / 5 * 4), this.y + (height / 2), 40, 36);
     }
 
     // 缩小
@@ -340,14 +357,19 @@ class ZoomPanel extends JPanel {
 
         width -= width / 10;
         height -= height / 10;
+
         setImgPos();
 
         repaint();
+
+        SHANGRI_LA_hotel.setBounds(this.x + (width / 2), this.y + (height / 10), 30, 40);
+        OrientalHotel.setBounds(this.x + (width / 3), this.y + (height / 4 * 3), 40, 42);
+        Benevolence.setBounds(this.x + (width / 5 * 4), this.y + (height / 2), 40, 36);
     }
 
     public void moveImg(int offsetX, int offsetY) {
-        offsetX /= 50;
-        offsetY /= 50;
+        offsetX /= 70;
+        offsetY /= 70;
 
         if (this.x > 1) {
             this.x = 1;
@@ -366,6 +388,10 @@ class ZoomPanel extends JPanel {
         }
 
         repaint();
+
+        SHANGRI_LA_hotel.setBounds(this.x + (width / 2), this.y + (height / 10), 30, 40);
+        OrientalHotel.setBounds(this.x + (width / 3), this.y + (height / 4 * 3), 40, 42);
+        Benevolence.setBounds(this.x + (width / 5 * 4), this.y + (height / 2), 40, 36);
     }
 
     // 重绘
@@ -374,5 +400,4 @@ class ZoomPanel extends JPanel {
 
         g.drawImage(ii.getImage(), x, y, width, height, null);
     }
-
 }
