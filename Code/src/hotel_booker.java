@@ -17,7 +17,6 @@ public class hotel_booker {
     static JButton bookresetButton = new JButton("reset");
 
     public static void main(String[] args) {
-        // 创建 JFrame 实例
         JFrame frame = new JFrame("Hotel Book System");
 
         ImageIcon background = new ImageIcon("img/background.jpg");// 背景图片
@@ -105,29 +104,6 @@ public class hotel_booker {
             }
         });
 
-//        bookPanel.addMouseWheelListener(new MouseWheelListener() {
-//            public void mouseWheelMoved(MouseWheelEvent e) {
-//
-//                Dimension frameSize = Toolkit.getDefaultToolkit().getScreenSize();
-//                frameSize.width = frameSize.width / 2;
-//                frameSize.height = frameSize.height * 3 / 4;
-//                String file = "img/map.jpg";
-//
-//                ZoomPanel zp = new ZoomPanel(frameSize, file, bookPanel);
-////                 滚轮向前滑动 放大
-//                if (e.getWheelRotation() < 0) {
-//                    zp.enlargeImg();
-//                    System.out.println("aaaaa");
-//                }
-//
-//                // 滚轮向后滑动 缩小
-//                else {
-//                    zp.reduceImg();
-//                    System.out.println("sssss");
-//                }
-//            }
-//        });
-
         frame.getLayeredPane().add(label, Integer.valueOf(Integer.MIN_VALUE));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -211,7 +187,6 @@ public class hotel_booker {
     private static void register(JPanel panel) {
         panel.setLayout(null);
 
-
     }
 
     private static void book(JPanel panel) {
@@ -231,17 +206,17 @@ public class hotel_booker {
                 // 滚轮向前滑动 放大
                 if (e.getWheelRotation() < 0) {
                     zp.enlargeImg();
-                    System.out.println("aaaaa");
                 }
                 // 滚轮向后滑动 缩小
                 else {
                     zp.reduceImg();
-                    System.out.println("sssss");
                 }
             }
         });
 
         MyComponent component=new MyComponent();
+        component.setBackground(Color.decode("#FFEEDD"));
+        component.setFont(new Font("Tahoma", Font.BOLD, 10));
         component.setBounds(60,40,470,20);
         component.setArrText(new String []{"Welcome to using Hotel Book System!",
                                            "The COVID-19 epidemic is raging, please wear masks when entering and exiting, pay attention to safe social distancing, and strengthen protective measures"
