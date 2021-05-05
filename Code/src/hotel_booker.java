@@ -188,9 +188,11 @@ public class hotel_booker {
 
 
         loginButton.setBounds(380, 330, 80, 25);
+        loginButton.setBackground(Color.decode("#FFEEDD"));
         panel.add(loginButton);
 
         RegisterButton.setBounds(220, 330, 80, 25);
+        RegisterButton.setBackground(Color.decode("#FFEEDD"));
         panel.add(RegisterButton);
 
     }
@@ -233,15 +235,19 @@ public class hotel_booker {
         panel.add(component);
 
         booklogoutButton.setBounds(0, 0, 80, 25);
+        booklogoutButton.setBackground(Color.white);
         panel.add(booklogoutButton);
 
         bookuserButton.setBounds(505, 0, 80, 25);
+        bookuserButton.setBackground(Color.white);
         panel.add(bookuserButton);
 
         bookconfirmButton.setBounds(330, 375, 80, 25);
+        bookconfirmButton.setBackground(Color.decode("#FFEEDD"));
         panel.add(bookconfirmButton);
 
         bookresetButton.setBounds(460, 375, 80, 25);
+        bookresetButton.setBackground(Color.decode("#FFEEDD"));
         panel.add(bookresetButton);
     }
 
@@ -358,7 +364,6 @@ class ZoomPanel extends JPanel {
         } else {
             this.y += offsetY;
         }
-
 
         repaint();
     }
