@@ -238,8 +238,7 @@ public class hotel_booker {
 
     private static void user(JPanel panel) {
         panel.setLayout(null);
-
-
+        
     }
 
 }
