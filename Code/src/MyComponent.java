@@ -1,23 +1,16 @@
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.concurrent.ExecutorService;
+import java.awt.Toolkit;
+import javax.swing.*;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 
-
-/**
- * 显示界面的组件实体类
- * @author 崔耀强   20150507
- * @version 1.1
- * */
-
-public class MyComponent extends JButton {
+public class MyComponent extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private JLabel jl2;//放value
     private String[] msg;
 
-    private int x=90,y=17;
+    private int x=480,y=14;
     private int i=0;
     private Roll roll;
     private ExecutorService pool;
@@ -86,7 +79,7 @@ public class MyComponent extends JButton {
                     Thread.sleep(400);
                 } catch (InterruptedException e) {
                 }
-                x=90;
+                x=480;
             }
         }
     }
@@ -94,9 +87,9 @@ public class MyComponent extends JButton {
     public void paint(Graphics g) {
         super.paint(g);
         if(msg!=null){
-            if(i<msg.length){
-
-                g.drawString(msg[i],x,y);
+            Toolkit tool = this.getToolkit();
+            if(i<msg.length) {
+                g.drawString(msg[i], x, y);
             }
             this.repaint();
         }

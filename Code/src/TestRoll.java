@@ -5,9 +5,6 @@ import javax.swing.JPanel;
 
 public class TestRoll extends JFrame{
 
-    /**
-     * @param args
-     */
     public TestRoll() {
 
         JPanel jp=new JPanel();
