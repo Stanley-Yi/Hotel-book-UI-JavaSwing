@@ -1,10 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.Font;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 
 public class hotel_booker {
 
@@ -32,6 +29,7 @@ public class hotel_booker {
         JPanel bookPanel = (JPanel) frame.getContentPane();
         JPanel registerPanel = (JPanel) frame.getContentPane();
         JPanel userPanel = (JPanel) frame.getContentPane();
+        JPanel confirmPanel = (JPanel) frame.getContentPane();
 
         login(loginPanel);
         loginPanel.setVisible(true);
@@ -101,6 +99,19 @@ public class hotel_booker {
                 userPanel.setLayout(new FlowLayout());
                 user(userPanel);
                 userPanel.setVisible(true);
+            }
+        });
+
+        bookconfirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bookPanel.setVisible(false);
+                bookPanel.removeAll();
+
+                confirmPanel.setOpaque(false);
+                confirmPanel.setLayout(new FlowLayout());
+                confirm(confirmPanel);
+                confirmPanel.setVisible(true);
             }
         });
 
@@ -206,9 +217,7 @@ public class hotel_booker {
                 // 滚轮向前滑动 放大
                 if (e.getWheelRotation() < 0) {
                     zp.enlargeImg();
-                }
-                // 滚轮向后滑动 缩小
-                else {
+                } else if (e.getWheelRotation() > 0) {
                     zp.reduceImg();
                 }
             }
@@ -238,7 +247,12 @@ public class hotel_booker {
 
     private static void user(JPanel panel) {
         panel.setLayout(null);
-        
+
+    }
+
+    private static void confirm(JPanel panel) {
+        panel.setLayout(null);
+
     }
 
 }
@@ -253,7 +267,7 @@ class ZoomPanel extends JPanel {
     private int x, y, width, height;// 图片的坐标、缩放的size
 
     public ZoomPanel(Dimension fs, String imgPath) {
-        setToolTipText("Slide scroll of mouse wheel to zoom in and out");
+        setToolTipText("Slide and Drag mouse to zoom in/out and move");
         this.frameSize = fs;
 
         ii = new ImageIcon(imgPath);
@@ -261,6 +275,29 @@ class ZoomPanel extends JPanel {
         width = 240;
         height = 300;
         setImgPos();
+
+        final int[] originX = new int[1];
+        final int[] originY = new int[1];
+
+        this.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e){
+                // 记录鼠标按下时的点
+                originX[0] = e.getX();
+                originY[0] = e.getY();
+            }
+        });
+
+        this.addMouseMotionListener(new MouseMotionAdapter(){
+            @Override
+            public void mouseDragged(MouseEvent e){
+                // 拖拽时移动
+                int offsetX = e.getX() - originX[0];
+                int offsetY = e.getY() - originY[0];
+
+                moveImg(offsetX, offsetY);
+            }
+        });
 
     }
 
@@ -298,6 +335,30 @@ class ZoomPanel extends JPanel {
         width -= width / 10;
         height -= height / 10;
         setImgPos();
+
+        repaint();
+    }
+
+    public void moveImg(int offsetX, int offsetY) {
+        offsetX /= 50;
+        offsetY /= 50;
+
+        if (this.x > 1) {
+            this.x = 1;
+        } else if (this.x + width < 240) {
+            this.x = 240 - width;
+        } else {
+            this.x += offsetX;
+        }
+
+        if (this.y > 1) {
+            this.y = 1;
+        } else if (this.y + height < 300) {
+            this.y = 300 - height;
+        } else {
+            this.y += offsetY;
+        }
+
 
         repaint();
     }
