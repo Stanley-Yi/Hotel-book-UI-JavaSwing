@@ -429,37 +429,37 @@ public class hotel_booker {
         panel.add(hotelAddressLabel);
 
         if (hotel == 1) {
-            JLabel addressLabel = new JLabel("1218 Middle Yan'an Road, Jing An");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            JLabel addressLabel = new JLabel("1218 Middle Yan'an Road, Jing An");
             addressLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             addressLabel.setForeground(Color.black);
             addressLabel.setBounds(5, 66, 280, 20);
             panel.add(addressLabel);
 
-            JLabel addressLabel_2 = new JLabel("Kerry Centre, Shanghai 200040 China");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            JLabel addressLabel_2 = new JLabel("Kerry Centre, Shanghai 200040 China");
             addressLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
             addressLabel_2.setForeground(Color.black);
             addressLabel_2.setBounds(5, 88, 280, 20);
             panel.add(addressLabel_2);
         } else if (hotel == 2) {
-            JLabel addressLabel = new JLabel("105 Penang Road, George Town, ");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            JLabel addressLabel = new JLabel("105 Penang Road, George Town, ");
             addressLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             addressLabel.setForeground(Color.black);
             addressLabel.setBounds(5, 66, 280, 20);
             panel.add(addressLabel);
 
-            JLabel addressLabel_2 = new JLabel("Penang 10000 Malaysia");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            JLabel addressLabel_2 = new JLabel("Penang 10000 Malaysia");
             addressLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
             addressLabel_2.setForeground(Color.black);
             addressLabel_2.setBounds(5, 88, 280, 20);
             panel.add(addressLabel_2);
         } else {
-            JLabel addressLabel = new JLabel("256 Xingye Avenue, Guangzhou,");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            JLabel addressLabel = new JLabel("256 Xingye Avenue, Guangzhou,");
             addressLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             addressLabel.setForeground(Color.black);
             addressLabel.setBounds(5, 66, 280, 20);
             panel.add(addressLabel);
 
-            JLabel addressLabel_2 = new JLabel("Guangzhou 511442 China");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            JLabel addressLabel_2 = new JLabel("Guangzhou 511442 China");
             addressLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
             addressLabel_2.setForeground(Color.black);
             addressLabel_2.setBounds(5, 88, 280, 20);
