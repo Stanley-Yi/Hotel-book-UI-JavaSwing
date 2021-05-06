@@ -8,7 +8,6 @@ public class ThreadGroupUtil {
     static {
 
         size=400;
-        System.out.println(size);
         pool = Executors. newFixedThreadPool(size);
     }
 
