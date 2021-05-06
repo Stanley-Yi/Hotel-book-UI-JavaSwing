@@ -2,6 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Font;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class hotel_booker {
 
@@ -272,10 +278,18 @@ public class hotel_booker {
 
         JLabel totalPriceLabel = new JLabel();
         JLabel numLabel = new JLabel();
+        JLabel totalDayLabel = new JLabel();
 
         JLabel Calendar = new JLabel("Calendar");
         JTextField checkinText = new JTextField();
         JTextField checkoutText = new JTextField();
+
+        LocalDate cIdate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate cOdate = LocalDate.now().plusDays(1);
+
+        checkinText.setText(cIdate.format(formatter));
+        checkoutText.setText(cOdate.format(formatter));
 
         CalendarPanel p = new CalendarPanel(checkinText, "yyyy/MM/dd");
         CalendarPanel p2 = new CalendarPanel(checkoutText, "yyyy/MM/dd");
@@ -297,7 +311,7 @@ public class hotel_booker {
 
                 panel.setVisible(false);
 
-                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText);
+                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
 
                 panel.setVisible(true);
             }
@@ -313,7 +327,7 @@ public class hotel_booker {
                 } else {
                     roomNum[0] -= 1;
                 }
-                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText);
+                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
                 panel.setVisible(true);
             }
 
@@ -330,14 +344,14 @@ public class hotel_booker {
                     roomNum[0] += 1;
                 }
 
-                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText);
+                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
                 panel.setVisible(true);
             }
         });
 
     }
 
-    private static void hotelInfo(JPanel panel, JButton roomSub, JButton roomPlus, int roomNum, int hotel, JLabel totalPriceLabel, JLabel numLabel, JTextField checkinText, JTextField checkoutText) {
+    private static void hotelInfo(JPanel panel, JButton roomSub, JButton roomPlus, int roomNum, int hotel, JLabel totalPriceLabel, JLabel numLabel, JTextField checkinText, JTextField checkoutText, JLabel totalDayLabel) {
         panel.setLayout(null);
 
         String[] hotelInfo = new String[3];
@@ -401,7 +415,21 @@ public class hotel_booker {
         priceLabel.setBounds(5,132,280,20);
         panel.add(priceLabel);
 
+        String checkin = checkinText.getText();
+        String checkout = checkoutText.getText();
         int day = 1;
+
+        DateFormat dft = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            Date star = dft.parse(checkin);//开始时间
+            Date endDay=dft.parse(checkout);//结束时间
+            Long starTime=star.getTime();
+            Long endTime=endDay.getTime();
+            Long num=endTime-starTime;//时间戳相差的毫秒数
+            day = (int) (num/24/60/60/1000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         JLabel CheckinLabel = new JLabel("Check-in date:");
         CheckinLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -421,13 +449,19 @@ public class hotel_booker {
         checkoutText.setBounds(150, 176, 100, 20);
         panel.add(checkoutText);
 
+        totalDayLabel.setText("Total Days: " + day);
+        totalDayLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        totalDayLabel.setForeground(Color.black);
+        totalDayLabel.setBounds(5,198,160,20);
+        panel.add(totalDayLabel);
+
         JLabel roomNumberLabel = new JLabel("Number of Rooms:");
         roomNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         roomNumberLabel.setForeground(Color.black);
-        roomNumberLabel.setBounds(5,198,150,20);
+        roomNumberLabel.setBounds(5,220,150,20);
         panel.add(roomNumberLabel);
 
-        roomSub.setBounds(150,199,38,20);
+        roomSub.setBounds(150,221,38,20);
         panel.add(roomSub);
 
         numLabel.setText("" + roomNum);
@@ -437,10 +471,10 @@ public class hotel_booker {
         if (roomNum > 9) {
             loc = 198;
         }
-        numLabel.setBounds(loc,198,20,20);
+        numLabel.setBounds(loc,220,20,20);
         panel.add(numLabel);
 
-        roomPlus.setBounds(225,199,41,20);
+        roomPlus.setBounds(225,221,41,20);
         panel.add(roomPlus);
 
         int ttp = price * roomNum * day;
@@ -448,7 +482,7 @@ public class hotel_booker {
         totalPriceLabel.setText("Total Price:"+" $"+ttp);
         totalPriceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         totalPriceLabel.setForeground(Color.black);
-        totalPriceLabel.setBounds(5,220,280,20);
+        totalPriceLabel.setBounds(5,242,280,20);
         panel.add(totalPriceLabel);
     }
 

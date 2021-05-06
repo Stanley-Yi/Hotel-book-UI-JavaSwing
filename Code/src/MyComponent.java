@@ -35,20 +35,16 @@ public class MyComponent extends JPanel {
         this.add(jl2);
     }
 
-    /**
-     * 设置显示值
-     * */
+
     public void setArrText(String[] msg){
         this.msg=msg;
-        /*
-         * 滚动实现
-         * */
+
         if(msg!=null&&msg.length>0){
             flag=true;
             pool=ThreadGroupUtil.getInstance();
             if(roll==null){
                 roll=new Roll();
-                //	roll.start();
+
                 pool.execute(roll);
             }
         }else{
@@ -56,9 +52,7 @@ public class MyComponent extends JPanel {
         }
     }
 
-    /**
-     *  滚动线程，当有业务值传进来时候，启动该线程
-     */
+
     class Roll extends Thread{
         @Override
         public void run(){
