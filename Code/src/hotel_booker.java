@@ -306,8 +306,48 @@ public class hotel_booker {
                 selectHotelLabel.setVisible(false);
                 selectHotelLabel.removeAll();
 
+                hotelInfoPanel.removeAll();
+
                 panel.add(hotelInfoPanel);
                 hotel = 1;
+
+                panel.setVisible(false);
+
+                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
+
+                panel.setVisible(true);
+            }
+        });
+
+        OrientalHotel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectHotelLabel.setVisible(false);
+                selectHotelLabel.removeAll();
+
+                hotelInfoPanel.removeAll();
+
+                panel.add(hotelInfoPanel);
+                hotel = 2;
+
+                panel.setVisible(false);
+
+                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
+
+                panel.setVisible(true);
+            }
+        });
+
+        Benevolence.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectHotelLabel.setVisible(false);
+                selectHotelLabel.removeAll();
+
+                hotelInfoPanel.removeAll();
+
+                panel.add(hotelInfoPanel);
+                hotel = 3;
 
                 panel.setVisible(false);
 
@@ -362,11 +402,11 @@ public class hotel_booker {
                 break;
 
             case 2:
-                hotelInfo = new String[]{"Oriental Hotel", "105 Penang Road, George Town, Penang 10000 Malaysia", "(86 64) 2849 6666", "528"};
+                hotelInfo = new String[]{"Oriental Hotel", "(86 64) 2849 6666", "528"};
                 break;
 
             case 3:
-                hotelInfo = new String[]{"Benevolence Hotel", "256 Xingye Avenue, Guangzhou, Guangzhou 511442 China", "(86 57) 7895 1568", "998"};
+                hotelInfo = new String[]{"Benevolence Hotel", "(86 57) 7895 1568", "998"};
                 break;
         }
 
@@ -396,6 +436,30 @@ public class hotel_booker {
             panel.add(addressLabel);
 
             JLabel addressLabel_2 = new JLabel("Kerry Centre, Shanghai 200040 China");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            addressLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+            addressLabel_2.setForeground(Color.black);
+            addressLabel_2.setBounds(5, 88, 280, 20);
+            panel.add(addressLabel_2);
+        } else if (hotel == 2) {
+            JLabel addressLabel = new JLabel("105 Penang Road, George Town, ");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            addressLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            addressLabel.setForeground(Color.black);
+            addressLabel.setBounds(5, 66, 280, 20);
+            panel.add(addressLabel);
+
+            JLabel addressLabel_2 = new JLabel("Penang 10000 Malaysia");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            addressLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+            addressLabel_2.setForeground(Color.black);
+            addressLabel_2.setBounds(5, 88, 280, 20);
+            panel.add(addressLabel_2);
+        } else {
+            JLabel addressLabel = new JLabel("256 Xingye Avenue, Guangzhou,");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            addressLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            addressLabel.setForeground(Color.black);
+            addressLabel.setBounds(5, 66, 280, 20);
+            panel.add(addressLabel);
+
+            JLabel addressLabel_2 = new JLabel("Guangzhou 511442 China");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
             addressLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
             addressLabel_2.setForeground(Color.black);
             addressLabel_2.setBounds(5, 88, 280, 20);
