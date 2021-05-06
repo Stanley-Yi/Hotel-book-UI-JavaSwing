@@ -13,6 +13,11 @@ public class hotel_booker {
     static JButton bookconfirmButton = new JButton("confirm");
     static JButton bookresetButton = new JButton("reset");
 
+    public static JButton SHANGRI_LA_hotel = new JButton(new ImageIcon("img/SHANGRI_LA_Icon.jpg"));
+    public static JButton OrientalHotel = new JButton(new ImageIcon("img/Oriental_Icon.jpg"));
+    public static JButton Benevolence = new JButton(new ImageIcon("img/Benevolence_Icon.jpg"));
+    static int hotel;
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Hotel Book System");
 
@@ -205,6 +210,8 @@ public class hotel_booker {
     private static void book(JPanel panel) {
         panel.setLayout(null);
 
+        hotel = 0;
+
         Dimension frameSize = Toolkit.getDefaultToolkit().getScreenSize();
         frameSize.width = frameSize.width / 2;
         frameSize.height = frameSize.height / 4;
@@ -249,6 +256,200 @@ public class hotel_booker {
         bookresetButton.setBounds(460, 375, 80, 25);
         bookresetButton.setBackground(Color.decode("#FFEEDD"));
         panel.add(bookresetButton);
+
+        JLabel selectHotelLabel = new JLabel("Please select Hotel");
+        selectHotelLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+        selectHotelLabel.setForeground(Color.white);
+        selectHotelLabel.setBounds(320,180,200,20);
+        panel.add(selectHotelLabel);
+
+        int[] roomNum = {1};
+        JButton roomSub = new JButton("-");
+        JButton roomPlus = new JButton("+");
+
+        JPanel hotelInfoPanel = new JPanel();
+        hotelInfoPanel.setBounds(295, 100, 280, 270);
+
+        JLabel totalPriceLabel = new JLabel();
+        JLabel numLabel = new JLabel();
+
+        JLabel Calendar = new JLabel("Calendar");
+        JTextField checkinText = new JTextField();
+        JTextField checkoutText = new JTextField();
+
+        CalendarPanel p = new CalendarPanel(checkinText, "yyyy/MM/dd");
+        CalendarPanel p2 = new CalendarPanel(checkoutText, "yyyy/MM/dd");
+        p.initCalendarPanel();
+        p.add(Calendar);
+        panel.add(p);
+        p2.initCalendarPanel();
+        p2.add(Calendar);
+        panel.add(p2);
+
+        SHANGRI_LA_hotel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectHotelLabel.setVisible(false);
+                selectHotelLabel.removeAll();
+
+                panel.add(hotelInfoPanel);
+                hotel = 1;
+
+                panel.setVisible(false);
+
+                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText);
+
+                panel.setVisible(true);
+            }
+        });
+
+        roomSub.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel.setVisible(false);
+
+                if (roomNum[0] - 1 <= 0) {
+                    roomNum[0] = 0;
+                } else {
+                    roomNum[0] -= 1;
+                }
+                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText);
+                panel.setVisible(true);
+            }
+
+        });
+
+        roomPlus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel.setVisible(false);
+
+                if (roomNum[0] + 1 > 30) {
+                    roomNum[0] = 30;
+                } else {
+                    roomNum[0] += 1;
+                }
+
+                hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText);
+                panel.setVisible(true);
+            }
+        });
+
+    }
+
+    private static void hotelInfo(JPanel panel, JButton roomSub, JButton roomPlus, int roomNum, int hotel, JLabel totalPriceLabel, JLabel numLabel, JTextField checkinText, JTextField checkoutText) {
+        panel.setLayout(null);
+
+        String[] hotelInfo = new String[3];
+
+        switch (hotel) {
+            case 1:
+                hotelInfo = new String[]{"Shangri-La Hotels & Resorts", "(86 21) 2203 8888", "1488"};
+                break;
+
+            case 2:
+                hotelInfo = new String[]{"Oriental Hotel", "105 Penang Road, George Town, Penang 10000 Malaysia", "(86 64) 2849 6666", "528"};
+                break;
+
+            case 3:
+                hotelInfo = new String[]{"Benevolence Hotel", "256 Xingye Avenue, Guangzhou, Guangzhou 511442 China", "(86 57) 7895 1568", "998"};
+                break;
+        }
+
+        JLabel hotesdlNameLabel = new JLabel("Hotel Name:");
+        hotesdlNameLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        hotesdlNameLabel.setForeground(Color.black);
+        hotesdlNameLabel.setBounds(5,0,200,20);
+        panel.add(hotesdlNameLabel);
+
+        JLabel NameLabel = new JLabel(hotelInfo[0]);
+        NameLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        NameLabel.setForeground(Color.black);
+        NameLabel.setBounds(5,22,250,20);
+        panel.add(NameLabel);
+
+        JLabel hotelAddressLabel = new JLabel("Hotel Address:");
+        hotelAddressLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        hotelAddressLabel.setForeground(Color.black);
+        hotelAddressLabel.setBounds(5,44,200,20);
+        panel.add(hotelAddressLabel);
+
+        if (hotel == 1) {
+            JLabel addressLabel = new JLabel("1218 Middle Yan'an Road, Jing An");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            addressLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+            addressLabel.setForeground(Color.black);
+            addressLabel.setBounds(5, 66, 280, 20);
+            panel.add(addressLabel);
+
+            JLabel addressLabel_2 = new JLabel("Kerry Centre, Shanghai 200040 China");  // Kerry Centre, West Nanjing Road, Shanghai 200040 China
+            addressLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+            addressLabel_2.setForeground(Color.black);
+            addressLabel_2.setBounds(5, 88, 280, 20);
+            panel.add(addressLabel_2);
+        }
+
+        JLabel contactNumberLabel = new JLabel("Contact Number: " + hotelInfo[1]);
+        contactNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        contactNumberLabel.setForeground(Color.black);
+        contactNumberLabel.setBounds(5,110,280,20);
+        panel.add(contactNumberLabel);
+
+        int price = Integer.parseInt(hotelInfo[2]);
+        JLabel priceLabel = new JLabel("Price per night: $" + price);
+        priceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        priceLabel.setForeground(Color.black);
+        priceLabel.setBounds(5,132,280,20);
+        panel.add(priceLabel);
+
+        int day = 1;
+
+        JLabel CheckinLabel = new JLabel("Check-in date:");
+        CheckinLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        CheckinLabel.setForeground(Color.black);
+        CheckinLabel.setBounds(5,154,140,20);
+        panel.add(CheckinLabel);
+
+        checkinText.setBounds(150, 155, 100, 20);
+        panel.add(checkinText);
+
+        JLabel CheckoutLabel = new JLabel("Check out date:");
+        CheckoutLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        CheckoutLabel.setForeground(Color.black);
+        CheckoutLabel.setBounds(5,176,160,20);
+        panel.add(CheckoutLabel);
+
+        checkoutText.setBounds(150, 176, 100, 20);
+        panel.add(checkoutText);
+
+        JLabel roomNumberLabel = new JLabel("Number of Rooms:");
+        roomNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        roomNumberLabel.setForeground(Color.black);
+        roomNumberLabel.setBounds(5,198,150,20);
+        panel.add(roomNumberLabel);
+
+        roomSub.setBounds(150,199,38,20);
+        panel.add(roomSub);
+
+        numLabel.setText("" + roomNum);
+        numLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        numLabel.setForeground(Color.black);
+        int loc = 201;
+        if (roomNum > 9) {
+            loc = 198;
+        }
+        numLabel.setBounds(loc,198,20,20);
+        panel.add(numLabel);
+
+        roomPlus.setBounds(225,199,41,20);
+        panel.add(roomPlus);
+
+        int ttp = price * roomNum * day;
+
+        totalPriceLabel.setText("Total Price:"+" $"+ttp);
+        totalPriceLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        totalPriceLabel.setForeground(Color.black);
+        totalPriceLabel.setBounds(5,220,280,20);
+        panel.add(totalPriceLabel);
     }
 
     private static void user(JPanel panel) {
@@ -265,9 +466,9 @@ public class hotel_booker {
 
 class ZoomPanel extends JPanel {
 
-    JButton SHANGRI_LA_hotel = new JButton(new ImageIcon("img/SHANGRI_LA_Icon.jpg"));
-    JButton OrientalHotel = new JButton(new ImageIcon("img/Oriental_Icon.jpg"));
-    JButton Benevolence = new JButton(new ImageIcon("img/Benevolence_Icon.jpg"));
+    JButton SHANGRI_LA_hotel = hotel_booker.SHANGRI_LA_hotel;
+    JButton OrientalHotel = hotel_booker.OrientalHotel;
+    JButton Benevolence = hotel_booker.Benevolence;
 
     private static final long serialVersionUID = 1L;
     private ImageIcon ii;
