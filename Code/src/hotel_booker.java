@@ -308,8 +308,8 @@ public class hotel_booker {
             public void actionPerformed(ActionEvent e) {
                 panel.setVisible(false);
 
-                if (roomNum[0] - 1 <= 0) {
-                    roomNum[0] = 0;
+                if (roomNum[0] - 1 <= 1) {
+                    roomNum[0] = 1;
                 } else {
                     roomNum[0] -= 1;
                 }
@@ -324,7 +324,7 @@ public class hotel_booker {
             public void actionPerformed(ActionEvent e) {
                 panel.setVisible(false);
 
-                if (roomNum[0] + 1 > 30) {
+                if (roomNum[0] + 1 >= 30) {
                     roomNum[0] = 30;
                 } else {
                     roomNum[0] += 1;
