@@ -14,6 +14,8 @@ public class hotel_booker {
     static JButton loginButton = new JButton("login");
     static JButton RegisterButton = new JButton("register");
 
+    static JButton registerBack = new JButton("<- Back");
+
     static JButton booklogoutButton = new JButton("log out");
     static JButton bookuserButton = new JButton("user");
     static JButton bookconfirmButton = new JButton("confirm");
@@ -71,6 +73,19 @@ public class hotel_booker {
                 registerPanel.setLayout(new FlowLayout());
                 register(registerPanel);
                 registerPanel.setVisible(true);
+            }
+        });
+
+        registerBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registerPanel.setVisible(false);
+                registerPanel.removeAll();
+
+                loginPanel.setOpaque(false);
+                loginPanel.setLayout(new FlowLayout());
+                login(loginPanel);
+                loginPanel.setVisible(true);
             }
         });
 
@@ -210,6 +225,10 @@ public class hotel_booker {
 
     private static void register(JPanel panel) {
         panel.setLayout(null);
+
+        registerBack.setBounds(0, 0, 80, 25);
+        registerBack.setBackground(Color.white);
+        panel.add(registerBack);
 
     }
 
