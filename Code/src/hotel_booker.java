@@ -173,6 +173,32 @@ public class hotel_booker {
             }
         });
 
+        userBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userPanel.setVisible(false);
+                userPanel.removeAll();
+
+                bookPanel.setOpaque(false);
+                bookPanel.setLayout(new FlowLayout());
+                book(bookPanel);
+                bookPanel.setVisible(true);
+            }
+        });
+
+        userLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userPanel.setVisible(false);
+                userPanel.removeAll();
+
+                loginPanel.setOpaque(false);
+                loginPanel.setLayout(new FlowLayout());
+                login(loginPanel);
+                loginPanel.setVisible(true);
+            }
+        });
+
         frame.getLayeredPane().add(label, Integer.valueOf(Integer.MIN_VALUE));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -604,6 +630,13 @@ public class hotel_booker {
     private static void user(JPanel panel) {
         panel.setLayout(null);
 
+        userBack.setBounds(0, 0, 80, 25);
+        userBack.setBackground(Color.white);
+        panel.add(userBack);
+
+        userLogout.setBounds(505, 0, 80, 25);
+        userLogout.setBackground(Color.white);
+        panel.add(userLogout);
     }
 
     private static void confirm(JPanel panel) {
