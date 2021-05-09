@@ -26,6 +26,8 @@ public class hotel_booker {
     public static JButton Benevolence = new JButton(new ImageIcon("img/Benevolence_Icon.jpg"));
     static int hotel;
 
+    static JButton confirmBack = new JButton("<- Back");
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Hotel Book System");
 
@@ -138,6 +140,19 @@ public class hotel_booker {
                 confirmPanel.setLayout(new FlowLayout());
                 confirm(confirmPanel);
                 confirmPanel.setVisible(true);
+            }
+        });
+
+        confirmBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                confirmPanel.setVisible(false);
+                confirmPanel.removeAll();
+
+                bookPanel.setOpaque(false);
+                bookPanel.setLayout(new FlowLayout());
+                book(bookPanel);
+                bookPanel.setVisible(true);
             }
         });
 
@@ -577,6 +592,9 @@ public class hotel_booker {
     private static void confirm(JPanel panel) {
         panel.setLayout(null);
 
+        confirmBack.setBounds(0, 0, 80, 25);
+        confirmBack.setBackground(Color.white);
+        panel.add(confirmBack);
     }
 
 }
