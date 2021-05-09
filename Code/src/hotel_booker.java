@@ -27,6 +27,10 @@ public class hotel_booker {
     static int hotel;
 
     static JButton confirmBack = new JButton("<- Back");
+    static JButton confirmLogout = new JButton("log out");
+
+    static JButton userBack = new JButton("<- Back");
+    static JButton userLogout = new JButton("log out");
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Hotel Book System");
@@ -153,6 +157,19 @@ public class hotel_booker {
                 bookPanel.setLayout(new FlowLayout());
                 book(bookPanel);
                 bookPanel.setVisible(true);
+            }
+        });
+
+        confirmLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                confirmPanel.setVisible(false);
+                confirmPanel.removeAll();
+
+                loginPanel.setOpaque(false);
+                loginPanel.setLayout(new FlowLayout());
+                login(loginPanel);
+                loginPanel.setVisible(true);
             }
         });
 
@@ -595,6 +612,10 @@ public class hotel_booker {
         confirmBack.setBounds(0, 0, 80, 25);
         confirmBack.setBackground(Color.white);
         panel.add(confirmBack);
+
+        confirmLogout.setBounds(505, 0, 80, 25);
+        confirmLogout.setBackground(Color.white);
+        panel.add(confirmLogout);
     }
 
 }
