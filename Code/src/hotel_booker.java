@@ -18,16 +18,12 @@ public class hotel_booker {
 
     static JButton booklogoutButton = new JButton("log out");
     static JButton bookuserButton = new JButton("user");
-    static JButton bookconfirmButton = new JButton("confirm");
     static JButton bookresetButton = new JButton("reset");
 
     public static JButton SHANGRI_LA_hotel = new JButton(new ImageIcon("img/SHANGRI_LA_Icon.jpg"));
     public static JButton OrientalHotel = new JButton(new ImageIcon("img/Oriental_Icon.jpg"));
     public static JButton Benevolence = new JButton(new ImageIcon("img/Benevolence_Icon.jpg"));
     static int hotel;
-
-    static JButton confirmBack = new JButton("<- Back");
-    static JButton confirmLogout = new JButton("log out");
 
     static JButton userBack = new JButton("<- Back");
     static JButton userLogout = new JButton("log out");
@@ -48,7 +44,6 @@ public class hotel_booker {
         JPanel bookPanel = (JPanel) frame.getContentPane();
         JPanel registerPanel = (JPanel) frame.getContentPane();
         JPanel userPanel = (JPanel) frame.getContentPane();
-        JPanel confirmPanel = (JPanel) frame.getContentPane();
 
         login(loginPanel);
         loginPanel.setVisible(true);
@@ -131,45 +126,6 @@ public class hotel_booker {
                 userPanel.setLayout(new FlowLayout());
                 user(userPanel);
                 userPanel.setVisible(true);
-            }
-        });
-
-        bookconfirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                bookPanel.setVisible(false);
-                bookPanel.removeAll();
-
-                confirmPanel.setOpaque(false);
-                confirmPanel.setLayout(new FlowLayout());
-                confirm(confirmPanel);
-                confirmPanel.setVisible(true);
-            }
-        });
-
-        confirmBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                confirmPanel.setVisible(false);
-                confirmPanel.removeAll();
-
-                bookPanel.setOpaque(false);
-                bookPanel.setLayout(new FlowLayout());
-                book(bookPanel);
-                bookPanel.setVisible(true);
-            }
-        });
-
-        confirmLogout.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                confirmPanel.setVisible(false);
-                confirmPanel.removeAll();
-
-                loginPanel.setOpaque(false);
-                loginPanel.setLayout(new FlowLayout());
-                login(loginPanel);
-                loginPanel.setVisible(true);
             }
         });
 
@@ -306,7 +262,6 @@ public class hotel_booker {
 
         panel.addMouseWheelListener(new MouseWheelListener() {
             public void mouseWheelMoved(MouseWheelEvent e) {
-                // 滚轮向前滑动 放大
                 if (e.getWheelRotation() < 0) {
                     zp.enlargeImg();
                 } else if (e.getWheelRotation() > 0) {
@@ -332,6 +287,7 @@ public class hotel_booker {
         bookuserButton.setBackground(Color.white);
         panel.add(bookuserButton);
 
+        JButton bookconfirmButton = new JButton("confirm");
         bookconfirmButton.setBounds(330, 375, 80, 25);
         bookconfirmButton.setBackground(Color.decode("#FFEEDD"));
         panel.add(bookconfirmButton);
@@ -355,15 +311,17 @@ public class hotel_booker {
 
         JLabel totalPriceLabel = new JLabel();
         JLabel numLabel = new JLabel();
-        JLabel totalDayLabel = new JLabel();
 
         JLabel Calendar = new JLabel("Calendar");
-        JTextField checkinText = new JTextField();
-        JTextField checkoutText = new JTextField();
 
         LocalDate cIdate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate cOdate = LocalDate.now().plusDays(1);
+
+        JLabel totalDayLabel = new JLabel();
+
+        JTextField checkinText = new JTextField();
+        JTextField checkoutText = new JTextField();
 
         checkinText.setText(cIdate.format(formatter));
         checkoutText.setText(cOdate.format(formatter));
@@ -376,6 +334,8 @@ public class hotel_booker {
         p2.initCalendarPanel();
         p2.add(Calendar);
         panel.add(p2);
+
+        final boolean[] selected = {false};
 
         SHANGRI_LA_hotel.addActionListener(new ActionListener() {
             @Override
@@ -393,6 +353,7 @@ public class hotel_booker {
                 hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
 
                 panel.setVisible(true);
+                selected[0] = true;
             }
         });
 
@@ -412,6 +373,7 @@ public class hotel_booker {
                 hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
 
                 panel.setVisible(true);
+                selected[0] = true;
             }
         });
 
@@ -431,6 +393,7 @@ public class hotel_booker {
                 hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
 
                 panel.setVisible(true);
+                selected[0] = true;
             }
         });
 
@@ -463,6 +426,68 @@ public class hotel_booker {
 
                 hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
                 panel.setVisible(true);
+            }
+        });
+
+        JLabel confirmError = new JLabel("Wrong date, please reselect");
+        JLabel confirmSuccess = new JLabel("Room reservation is successful");
+
+        bookconfirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selected[0]) {
+                    String checkin = checkinText.getText();
+                    String checkout = checkoutText.getText();
+                    String todayDate = LocalDate.now().format(formatter);
+
+                    int day = 1;
+
+                    DateFormat dft = new SimpleDateFormat("yyyy/MM/dd");
+                    try {
+                        Date star = dft.parse(checkin);
+                        Date today = dft.parse(todayDate);
+
+                        if (today.after(star)) {
+                            day = -1;
+                        } else {
+                            Date endDay = dft.parse(checkout);
+                            Long starTime = star.getTime();
+                            Long endTime = endDay.getTime();
+                            Long num = endTime - starTime;
+                            day = (int) (num / 24 / 60 / 60 / 1000);
+                        }
+                    } catch (ParseException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    if (day <= 0) {
+                        panel.setVisible(false);
+
+                        confirmSuccess.setVisible(false);
+                        confirmSuccess.removeAll();
+
+                        confirmError.setBounds(330, 400, 180, 40);
+                        confirmError.setForeground(Color.red);
+                        panel.add(confirmError);
+                        confirmError.setVisible(true);
+
+                        hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
+                        panel.setVisible(true);
+                    } else {
+                        panel.setVisible(false);
+
+                        confirmError.setVisible(false);
+                        confirmError.removeAll();
+
+                        confirmSuccess.setBounds(330, 400, 180, 40);
+                        confirmSuccess.setForeground(Color.green);
+                        panel.add(confirmSuccess);
+                        confirmSuccess.setVisible(true);
+
+                        hotelInfo(hotelInfoPanel, roomSub, roomPlus, roomNum[0], hotel, totalPriceLabel, numLabel, checkinText, checkoutText, totalDayLabel);
+                        panel.setVisible(true);
+                    }
+                }
             }
         });
 
@@ -567,7 +592,7 @@ public class hotel_booker {
             Long starTime=star.getTime();
             Long endTime=endDay.getTime();
             Long num=endTime-starTime;//时间戳相差的毫秒数
-            day = (int) (num/24/60/60/1000);
+            day = (int) (num / 24 / 60 / 60 / 1000);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -637,18 +662,6 @@ public class hotel_booker {
         userLogout.setBounds(505, 0, 80, 25);
         userLogout.setBackground(Color.white);
         panel.add(userLogout);
-    }
-
-    private static void confirm(JPanel panel) {
-        panel.setLayout(null);
-
-        confirmBack.setBounds(0, 0, 80, 25);
-        confirmBack.setBackground(Color.white);
-        panel.add(confirmBack);
-
-        confirmLogout.setBounds(505, 0, 80, 25);
-        confirmLogout.setBackground(Color.white);
-        panel.add(confirmLogout);
     }
 
 }
