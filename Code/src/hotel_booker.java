@@ -299,8 +299,14 @@ public class hotel_booker {
         JLabel selectHotelLabel = new JLabel("Please select Hotel");
         selectHotelLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         selectHotelLabel.setForeground(Color.white);
-        selectHotelLabel.setBounds(320,180,200,20);
+        selectHotelLabel.setBounds(320,180,200,30);
         panel.add(selectHotelLabel);
+
+        JLabel selectLabel = new JLabel("by Slide and Drag");
+        selectLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+        selectLabel.setForeground(Color.white);
+        selectLabel.setBounds(328,240,200,30);
+        panel.add(selectLabel);
 
         int[] roomNum = {1};
         JButton roomSub = new JButton("-");
@@ -343,6 +349,9 @@ public class hotel_booker {
                 selectHotelLabel.setVisible(false);
                 selectHotelLabel.removeAll();
 
+                selectLabel.setVisible(false);
+                selectLabel.removeAll();
+
                 hotelInfoPanel.removeAll();
 
                 panel.add(hotelInfoPanel);
@@ -363,6 +372,9 @@ public class hotel_booker {
                 selectHotelLabel.setVisible(false);
                 selectHotelLabel.removeAll();
 
+                selectLabel.setVisible(false);
+                selectLabel.removeAll();
+
                 hotelInfoPanel.removeAll();
 
                 panel.add(hotelInfoPanel);
@@ -382,6 +394,9 @@ public class hotel_booker {
             public void actionPerformed(ActionEvent e) {
                 selectHotelLabel.setVisible(false);
                 selectHotelLabel.removeAll();
+
+                selectLabel.setVisible(false);
+                selectLabel.removeAll();
 
                 hotelInfoPanel.removeAll();
 
@@ -771,8 +786,8 @@ class ZoomPanel extends JPanel {
     }
 
     public void moveImg(int offsetX, int offsetY) {
-        offsetX /= 70;
-        offsetY /= 70;
+        offsetX /= 50;
+        offsetY /= 50;
 
         if (this.x > 1) {
             this.x = 1;
