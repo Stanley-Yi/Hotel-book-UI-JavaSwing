@@ -18,16 +18,12 @@ public class hotel_booker {
     static JButton registerConfrim = new JButton("confrim");
 
     static JButton booklogoutButton = new JButton("log out");
-    static JButton bookuserButton = new JButton("user");
     static JButton bookresetButton = new JButton("reset");
 
     public static JButton SHANGRI_LA_hotel = new JButton(new ImageIcon("img/SHANGRI_LA_Icon.jpg"));
     public static JButton OrientalHotel = new JButton(new ImageIcon("img/Oriental_Icon.jpg"));
     public static JButton Benevolence = new JButton(new ImageIcon("img/Benevolence_Icon.jpg"));
     static int hotel;
-
-    static JButton userBack = new JButton("<- Back");
-    static JButton userLogout = new JButton("log out");
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Hotel Book System");
@@ -127,45 +123,6 @@ public class hotel_booker {
                 bookPanel.setLayout(new FlowLayout());
                 book(bookPanel);
                 bookPanel.setVisible(true);
-            }
-        });
-
-        bookuserButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                bookPanel.setVisible(false);
-                bookPanel.removeAll();
-
-                userPanel.setOpaque(false);
-                userPanel.setLayout(new FlowLayout());
-                user(userPanel);
-                userPanel.setVisible(true);
-            }
-        });
-
-        userBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userPanel.setVisible(false);
-                userPanel.removeAll();
-
-                bookPanel.setOpaque(false);
-                bookPanel.setLayout(new FlowLayout());
-                book(bookPanel);
-                bookPanel.setVisible(true);
-            }
-        });
-
-        userLogout.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userPanel.setVisible(false);
-                userPanel.removeAll();
-
-                loginPanel.setOpaque(false);
-                loginPanel.setLayout(new FlowLayout());
-                login(loginPanel);
-                loginPanel.setVisible(true);
             }
         });
 
@@ -332,17 +289,12 @@ public class hotel_booker {
         booklogoutButton.setBackground(Color.white);
         panel.add(booklogoutButton);
 
-        bookuserButton.setBounds(505, 0, 80, 25);
-        bookuserButton.setBackground(Color.white);
-        panel.add(bookuserButton);
-
         JButton bookconfirmButton = new JButton("confirm");
-        bookconfirmButton.setBounds(330, 375, 80, 25);
+        bookconfirmButton.setBounds(400, 375, 80, 25);
         bookconfirmButton.setBackground(Color.decode("#FFEEDD"));
-        panel.add(bookconfirmButton);
 
-        bookresetButton.setBounds(460, 375, 80, 25);
-        bookresetButton.setBackground(Color.decode("#FFEEDD"));
+        bookresetButton.setBounds(505, 0, 80, 25);
+        bookresetButton.setBackground(Color.white);
         panel.add(bookresetButton);
 
         JLabel selectHotelLabel = new JLabel("Please select Hotel");
@@ -403,6 +355,8 @@ public class hotel_booker {
 
                 hotelInfoPanel.removeAll();
 
+                panel.add(bookconfirmButton);
+
                 panel.add(hotelInfoPanel);
                 hotel = 1;
 
@@ -426,6 +380,8 @@ public class hotel_booker {
 
                 hotelInfoPanel.removeAll();
 
+                panel.add(bookconfirmButton);
+
                 panel.add(hotelInfoPanel);
                 hotel = 2;
 
@@ -448,6 +404,8 @@ public class hotel_booker {
                 selectLabel.removeAll();
 
                 hotelInfoPanel.removeAll();
+
+                panel.add(bookconfirmButton);
 
                 panel.add(hotelInfoPanel);
                 hotel = 3;
@@ -530,7 +488,8 @@ public class hotel_booker {
                         confirmSuccess.setVisible(false);
                         confirmSuccess.removeAll();
 
-                        confirmError.setBounds(330, 400, 180, 40);
+                        confirmError.setBounds(305, 400, 300, 40);
+                        confirmError.setFont(new Font("Tahoma", Font.BOLD, 18));
                         confirmError.setForeground(Color.red);
                         panel.add(confirmError);
                         confirmError.setVisible(true);
@@ -543,7 +502,8 @@ public class hotel_booker {
                         confirmError.setVisible(false);
                         confirmError.removeAll();
 
-                        confirmSuccess.setBounds(330, 400, 180, 40);
+                        confirmSuccess.setBounds(292, 400, 300, 40);
+                        confirmSuccess.setFont(new Font("Tahoma", Font.BOLD, 18));
                         confirmSuccess.setForeground(Color.green);
                         panel.add(confirmSuccess);
                         confirmSuccess.setVisible(true);
@@ -714,18 +674,6 @@ public class hotel_booker {
         totalPriceLabel.setForeground(Color.black);
         totalPriceLabel.setBounds(5,242,280,20);
         panel.add(totalPriceLabel);
-    }
-
-    private static void user(JPanel panel) {
-        panel.setLayout(null);
-
-        userBack.setBounds(0, 0, 80, 25);
-        userBack.setBackground(Color.white);
-        panel.add(userBack);
-
-        userLogout.setBounds(505, 0, 80, 25);
-        userLogout.setBackground(Color.white);
-        panel.add(userLogout);
     }
 
 }
