@@ -15,6 +15,7 @@ public class hotel_booker {
     static JButton RegisterButton = new JButton("register");
 
     static JButton registerBack = new JButton("<- Back");
+    static JButton registerConfrim = new JButton("confrim");
 
     static JButton booklogoutButton = new JButton("log out");
     static JButton bookuserButton = new JButton("user");
@@ -27,8 +28,6 @@ public class hotel_booker {
 
     static JButton userBack = new JButton("<- Back");
     static JButton userLogout = new JButton("log out");
-
-    static Object bookedHotels = new Object[1];
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Hotel Book System");
@@ -89,6 +88,19 @@ public class hotel_booker {
                 loginPanel.setLayout(new FlowLayout());
                 login(loginPanel);
                 loginPanel.setVisible(true);
+            }
+        });
+
+        registerConfrim.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registerPanel.setVisible(false);
+                registerPanel.removeAll();
+
+                bookPanel.setOpaque(false);
+                bookPanel.setLayout(new FlowLayout());
+                book(bookPanel);
+                bookPanel.setVisible(true);
             }
         });
 
@@ -203,7 +215,6 @@ public class hotel_booker {
         passwordText.setBounds(300,250,165,25);
         panel.add(passwordText);
 
-
         JLabel servLabel = new JLabel("24h Service Hotline:");
         servLabel.setFont(new Font("Tahoma", Font.BOLD, 9));
         servLabel.setForeground(Color.white);
@@ -246,6 +257,42 @@ public class hotel_booker {
         registerBack.setBackground(Color.white);
         panel.add(registerBack);
 
+        JLabel setCount = new JLabel("Create your own account");
+        setCount.setFont(new Font("Tahoma", Font.BOLD, 23));
+        setCount.setForeground(Color.white);
+        setCount.setBounds(150,80,300,50);
+        panel.add(setCount);
+
+        JLabel userLabel = new JLabel("User:");
+        userLabel.setForeground(Color.white);
+        userLabel.setBounds(150,200,100,25);
+        panel.add(userLabel);
+
+        JTextField userText = new JTextField(20);
+        userText.setBounds(270,200,165,25);
+        panel.add(userText);
+
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setForeground(Color.white);
+        passwordLabel.setBounds(150,250,80,25);
+        panel.add(passwordLabel);
+
+        JPasswordField passwordText = new JPasswordField(20);
+        passwordText.setBounds(270,250,165,25);
+        panel.add(passwordText);
+
+        JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
+        confirmPasswordLabel.setForeground(Color.white);
+        confirmPasswordLabel.setBounds(150,300,120,25);
+        panel.add(confirmPasswordLabel);
+
+        JPasswordField confirmPasswordText = new JPasswordField(20);
+        confirmPasswordText.setBounds(270,300,165,25);
+        panel.add(confirmPasswordText);
+
+        registerConfrim.setBounds(265, 370, 80, 25);
+        registerConfrim.setBackground(Color.white);
+        panel.add(registerConfrim);
     }
 
     private static void book(JPanel panel) {
@@ -679,18 +726,6 @@ public class hotel_booker {
         userLogout.setBounds(505, 0, 80, 25);
         userLogout.setBackground(Color.white);
         panel.add(userLogout);
-
-        JLabel userBookedLabel = new JLabel("Booked      Hotels");
-        userBookedLabel.setFont(new Font("Tahoma", Font.BOLD, 23));
-        userBookedLabel.setForeground(Color.white);
-        userBookedLabel.setBounds(180, 70, 250, 50);
-        panel.add(userBookedLabel);
-
-        JPanel userBookedPanel = new JPanel();
-        userBookedPanel.setBounds(73, 120, 440, 300);
-        panel.add(userBookedPanel);
-
-        
     }
 
 }
