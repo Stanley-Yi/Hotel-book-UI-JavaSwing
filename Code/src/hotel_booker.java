@@ -28,6 +28,8 @@ public class hotel_booker {
     static JButton userBack = new JButton("<- Back");
     static JButton userLogout = new JButton("log out");
 
+    static Object bookedHotels = new Object[1];
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Hotel Book System");
 
@@ -677,6 +679,18 @@ public class hotel_booker {
         userLogout.setBounds(505, 0, 80, 25);
         userLogout.setBackground(Color.white);
         panel.add(userLogout);
+
+        JLabel userBookedLabel = new JLabel("Booked      Hotels");
+        userBookedLabel.setFont(new Font("Tahoma", Font.BOLD, 23));
+        userBookedLabel.setForeground(Color.white);
+        userBookedLabel.setBounds(180, 70, 250, 50);
+        panel.add(userBookedLabel);
+
+        JPanel userBookedPanel = new JPanel();
+        userBookedPanel.setBounds(73, 120, 440, 300);
+        panel.add(userBookedPanel);
+
+        
     }
 
 }
