@@ -20,16 +20,16 @@ public class hotel_booker {
     static JButton booklogoutButton = new JButton("log out");
     static JButton bookresetButton = new JButton("reset");
 
-    public static JButton SHANGRI_LA_hotel = new JButton(new ImageIcon("img/SHANGRI_LA_Icon.jpg"));
-    public static JButton OrientalHotel = new JButton(new ImageIcon("img/Oriental_Icon.jpg"));
-    public static JButton Benevolence = new JButton(new ImageIcon("img/Benevolence_Icon.jpg"));
+    public static JButton SHANGRI_LA_hotel = new JButton(new ImageIcon("SHANGRI_LA_Icon.jpg"));
+    public static JButton OrientalHotel = new JButton(new ImageIcon("Oriental_Icon.jpg"));
+    public static JButton Benevolence = new JButton(new ImageIcon("Benevolence_Icon.jpg"));
     static int hotel;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Hotel Book System");
 
-        ImageIcon background = new ImageIcon("img/background.jpg");// 背景图片
-        JLabel label = new JLabel(background);// 把背景图片显示在一个标签里面
+        ImageIcon background = new ImageIcon("background.jpg");
+        JLabel label = new JLabel(background);
 
         label.setBounds(0, 0, 600, 500);
 
@@ -162,7 +162,6 @@ public class hotel_booker {
         userText.setBounds(300,200,165,25);
         panel.add(userText);
 
-        // 输入密码的文本域
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setForeground(Color.white);
         passwordLabel.setBounds(200,250,80,25);
@@ -260,7 +259,7 @@ public class hotel_booker {
         Dimension frameSize = Toolkit.getDefaultToolkit().getScreenSize();
         frameSize.width = frameSize.width / 2;
         frameSize.height = frameSize.height / 4;
-        String file = "img/map.jpg";
+        String file = "map.jpg";
 
         ZoomPanel zp = new ZoomPanel(frameSize, file);
         zp.setBounds(30,100,240,300);
@@ -611,11 +610,11 @@ public class hotel_booker {
 
         DateFormat dft = new SimpleDateFormat("yyyy/MM/dd");
         try {
-            Date star = dft.parse(checkin);//开始时间
-            Date endDay=dft.parse(checkout);//结束时间
+            Date star = dft.parse(checkin);
+            Date endDay=dft.parse(checkout);
             Long starTime=star.getTime();
             Long endTime=endDay.getTime();
-            Long num=endTime-starTime;//时间戳相差的毫秒数
+            Long num=endTime-starTime;
             day = (int) (num / 24 / 60 / 60 / 1000);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -687,7 +686,7 @@ class ZoomPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private ImageIcon ii;
     private Dimension frameSize;
-    private int x, y, width, height;// 图片的坐标、缩放的size
+    private int x, y, width, height;
 
     public ZoomPanel(Dimension fs, String imgPath) {
         setToolTipText("Slide and Drag mouse to zoom in/out and move");
@@ -715,7 +714,6 @@ class ZoomPanel extends JPanel {
         this.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e){
-                // 记录鼠标按下时的点
                 originX[0] = e.getX();
                 originY[0] = e.getY();
             }
@@ -724,7 +722,6 @@ class ZoomPanel extends JPanel {
         this.addMouseMotionListener(new MouseMotionAdapter(){
             @Override
             public void mouseDragged(MouseEvent e){
-                // 拖拽时移动
                 int offsetX = e.getX() - originX[0];
                 int offsetY = e.getY() - originY[0];
 
@@ -734,13 +731,11 @@ class ZoomPanel extends JPanel {
 
     }
 
-    // 设定x、y坐标
     public void setImgPos() {
         x = (frameSize.width - width) / 2 - 263;
         y = (frameSize.height - height) / 2 + 43;
     }
 
-    // 放大
     public void enlargeImg() {
         if (width >= ii.getIconWidth() * 2) {
             return;
@@ -761,7 +756,6 @@ class ZoomPanel extends JPanel {
         Benevolence.setBounds(this.x + (width / 5 * 4), this.y + (height / 2), 40, 36);
     }
 
-    // 缩小
     public void reduceImg() {
         if (width <= ii.getIconWidth() / 4) {
             return;
@@ -809,7 +803,6 @@ class ZoomPanel extends JPanel {
         Benevolence.setBounds(this.x + (width / 5 * 4), this.y + (height / 2), 40, 36);
     }
 
-    // 重绘
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 

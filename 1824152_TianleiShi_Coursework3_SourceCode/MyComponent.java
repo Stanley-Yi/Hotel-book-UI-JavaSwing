@@ -7,7 +7,7 @@ import javax.swing.*;
 public class MyComponent extends JPanel {
 
     private static final long serialVersionUID = 1L;
-    private JLabel jl2;//放value
+    private JLabel jl2;
     private String[] msg;
 
     private int x=480,y=14;
